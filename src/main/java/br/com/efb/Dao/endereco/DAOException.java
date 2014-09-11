@@ -1,4 +1,4 @@
-package br.com.efb.Dao;
+package br.com.efb.Dao.endereco;
 
 public class DAOException extends Exception {
 

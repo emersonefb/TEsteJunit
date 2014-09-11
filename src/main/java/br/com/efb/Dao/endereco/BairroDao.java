@@ -1,4 +1,4 @@
-package br.com.efb.Dao;
+package br.com.efb.Dao.endereco;
 
 import java.util.List;
 
@@ -64,7 +64,7 @@ public class BairroDao {
 		try {
 			bairro = em.find(Bairro.class, bairro.getId());
 		} catch (Exception causa) {
-			throw new DAOException("N�o foi possivel Encontrar", causa);
+			throw new DAOException("Nao foi possivel Encontrar", causa);
 		}
 		return bairro;
 
@@ -82,7 +82,7 @@ public class BairroDao {
 			em.remove(bairro);
 
 		} catch (Exception causa) {
-			throw new DAOException("N�o foi possivel Excluir", causa);
+			throw new DAOException("Nao foi possivel Excluir", causa);
 		}
 
 	}
