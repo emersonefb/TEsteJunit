@@ -38,7 +38,6 @@ public class TestDocumentos {
 		try {
 			documentosDao.salvar(documentos);
 		} catch (DAOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
