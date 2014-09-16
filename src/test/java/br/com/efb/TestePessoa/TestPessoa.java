@@ -31,7 +31,7 @@ public class TestPessoa {
 	Documentos documentos = new Documentos();
 	Endereco endereco = new Endereco();
 
-	@Test
+//	@Test
 	public void Salvar() {
 		pessoa.setNome("Pedro");
 		pessoa.setNomeCompleto("Pedro Luis");
@@ -59,7 +59,7 @@ public class TestPessoa {
 					+ pessoa.getNome() + " None Completo: "
 					+ pessoa.getNomeCompleto() + " Data Nascimento: "
 					+ pessoa.getDataDeNascimento() + " RG: "
-					+ pessoa.getDocumentos());
+					+ pessoa.getDocumentos().getRg().getNumero());
 		}
 	}
 

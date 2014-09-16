@@ -1,11 +1,9 @@
 package br.com.efb.entity.Pessoa.Contato;
 
-import java.util.List;
-
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.ManyToOne;
 
 @Entity
 public class Contato {
@@ -13,17 +11,15 @@ public class Contato {
 	@Id
 	@GeneratedValue
 	private int id;
-	
+
 	private String obs;
 
-	@OneToMany(mappedBy = "contato")
-	private List<Telefone> telefone;
-
-	@OneToMany(mappedBy = "contato")
-	private List<Celular> celular;
-
-	@OneToMany(mappedBy = "contato")
-	private List<EmailContato> emailContatos;
+	@ManyToOne
+	private Telefone telefone;
+	@ManyToOne
+	private Celular celular;
+	@ManyToOne
+	private EmailContato emailContatos;
 
 	public int getId() {
 		return id;
@@ -41,27 +37,27 @@ public class Contato {
 		this.obs = obs;
 	}
 
-	public List<Telefone> getTelefone() {
+	public Telefone getTelefone() {
 		return telefone;
 	}
 
-	public void setTelefone(List<Telefone> telefone) {
+	public void setTelefone(Telefone telefone) {
 		this.telefone = telefone;
 	}
 
-	public List<Celular> getCelular() {
+	public Celular getCelular() {
 		return celular;
 	}
 
-	public void setCelular(List<Celular> celular) {
+	public void setCelular(Celular celular) {
 		this.celular = celular;
 	}
 
-	public List<EmailContato> getEmailContatos() {
+	public EmailContato getEmailContatos() {
 		return emailContatos;
 	}
 
-	public void setEmailContatos(List<EmailContato> emailContatos) {
+	public void setEmailContatos(EmailContato emailContatos) {
 		this.emailContatos = emailContatos;
 	}
 
@@ -86,7 +82,5 @@ public class Contato {
 			return false;
 		return true;
 	}
-	
-	
 
 }

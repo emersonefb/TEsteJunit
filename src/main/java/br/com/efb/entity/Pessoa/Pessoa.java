@@ -105,8 +105,7 @@ public class Pessoa {
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result
-				+ ((nomeCompleto == null) ? 0 : nomeCompleto.hashCode());
+		result = prime * result + id;
 		return result;
 	}
 
@@ -119,10 +118,7 @@ public class Pessoa {
 		if (getClass() != obj.getClass())
 			return false;
 		Pessoa other = (Pessoa) obj;
-		if (nomeCompleto == null) {
-			if (other.nomeCompleto != null)
-				return false;
-		} else if (!nomeCompleto.equals(other.nomeCompleto))
+		if (id != other.id)
 			return false;
 		return true;
 	}
