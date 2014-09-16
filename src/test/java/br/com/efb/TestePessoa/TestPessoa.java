@@ -1,5 +1,6 @@
 package br.com.efb.TestePessoa;
 
+import java.util.Date;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -15,6 +16,7 @@ import br.com.efb.Dao.endereco.DAOException;
 import br.com.efb.entity.Dao.Pessoa.PessoaDao;
 import br.com.efb.entity.Pessoa.Pessoa;
 import br.com.efb.entity.Pessoa.Documentos.Documentos;
+import br.com.efb.entity.endereco.Endereco;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = { "file:src/main/webapp/WEB-INF/applicationContext.xml" })
@@ -27,11 +29,18 @@ public class TestPessoa {
 
 	Pessoa pessoa = new Pessoa();
 	Documentos documentos = new Documentos();
+	Endereco endereco = new Endereco();
 
-	// @Test
+	@Test
 	public void Salvar() {
 		pessoa.setNome("Pedro");
 		pessoa.setNomeCompleto("Pedro Luis");
+		pessoa.setDataDeNascimento(new Date());
+		endereco.setId(1);
+		documentos.setId(1);
+		pessoa.setEnderecos(endereco);
+		pessoa.setDocumentos(documentos);
+		pessoa.setSexo("M");
 
 		try {
 			pessoaDao.salvar(pessoa);
@@ -49,7 +58,8 @@ public class TestPessoa {
 			System.out.println("ID: " + pessoa.getId() + " None: "
 					+ pessoa.getNome() + " None Completo: "
 					+ pessoa.getNomeCompleto() + " Data Nascimento: "
-					+ pessoa.getDataDeNascimento()+" RG: "+pessoa.getDocumentos());
+					+ pessoa.getDataDeNascimento() + " RG: "
+					+ pessoa.getDocumentos());
 		}
 	}
 

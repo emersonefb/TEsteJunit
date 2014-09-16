@@ -1,5 +1,7 @@
 package br.com.efb.TestePessoa.Documentos;
 
+import static org.junit.Assert.assertTrue;
+
 import java.util.List;
 
 import javax.inject.Inject;
@@ -44,13 +46,42 @@ public class TestRG {
 	/**
 	 * Deve Retornar todos os RGs Cadastrados
 	 */
-	@Test
+//	@Test
 	public void BuscarTodos(){
 		List<RG> rgs = rgDao.listaRGs();
 		for (RG rg : rgs) {
 			System.out.println("Nº RG: "+ rg.getNumero());
 		}
 		
+		assertTrue(rgs.size()>0);
 	}
+
+	//	@Test
+	public void excluir() {
+		rg.setId(1);
+		try {
+			rgDao.excluir(rg);
+		} catch (DAOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+	}
+
+	@Test
+	public void buscarporID(){
+		rg.setId(1);
+		try {
+			rg = rgDao.buscarPorId(rg);
+		} catch (DAOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		System.out.println(rg.getNumero());
+		
+		
+		assertTrue(rg.getNumero().equalsIgnoreCase("330421128"));
+	}
+
 
 }

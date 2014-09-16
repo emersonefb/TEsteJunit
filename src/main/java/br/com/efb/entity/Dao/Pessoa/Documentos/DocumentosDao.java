@@ -46,8 +46,8 @@ public class DocumentosDao {
 	 */
 	@SuppressWarnings("unchecked")
 	@Transactional
-	public List<Documentos> listaDocumentoss() {
-		Query consulta = em.createQuery("select B from Documentos B");
+	public List<Documentos> listaDocumentos() {
+		Query consulta = em.createQuery("select R from Documentos R");
 		return consulta.getResultList();
 
 	}

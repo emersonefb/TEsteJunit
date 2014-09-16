@@ -55,7 +55,7 @@ public class testeEndereco {
 		assertTrue(enderecos.size() != 0);
 	}
 
-//	 @Test
+	 @Test
 	public void testsalvar() {
 		ruas.setId(1);
 		endereco.setNumero(10);

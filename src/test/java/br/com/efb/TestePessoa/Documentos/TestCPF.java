@@ -1,5 +1,7 @@
 package br.com.efb.TestePessoa.Documentos;
 
+import static org.junit.Assert.assertTrue;
+
 import java.util.List;
 
 import javax.inject.Inject;
@@ -29,7 +31,7 @@ public class TestCPF {
 	/**
 	 * Teste para salvar numero de CPF
 	 */
-	@Test
+//	@Test
 	public void Salvar() {
 		cpf.setNumero("123456789-01");
 
@@ -51,6 +53,33 @@ public class TestCPF {
 			System.out.println("Nº CPF: "+ cpf.getNumero());
 		}
 		
+	}
+	
+//	@Test
+	public void excluir() {
+		cpf.setId(1);
+		try {
+			cpfDao.excluir(cpf);
+		} catch (DAOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+	}
+
+	@Test
+	public void buscarporID(){
+		cpf.setId(1);
+		try {
+			cpf = cpfDao.buscarPorId(cpf);
+		} catch (DAOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		System.out.println(cpf.getNumero());
+		
+		
+		assertTrue(cpf.getNumero().equalsIgnoreCase("123456789-01"));
 	}
 
 }

@@ -46,7 +46,7 @@ public class RGDao {
 	@SuppressWarnings("unchecked")
 	@Transactional
 	public List<RG> listaRGs() {
-		Query consulta = em.createQuery("select B from RG B");
+		Query consulta = em.createQuery("select R from RG R");
 		return consulta.getResultList();
 
 	}

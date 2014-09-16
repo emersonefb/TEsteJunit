@@ -42,7 +42,7 @@ public class testeEstado {
 		assertTrue(estados.size() != 0);
 	}
 
-//	@Test
+	@Test
 	public void testsalvar() {
 		pais.setId(1);
 		estado.setNome("Sao Paulo");
@@ -83,7 +83,7 @@ public class testeEstado {
 		assertTrue(estado.getPais().getNome().equalsIgnoreCase("Brasil"));
 	}
 	
-	@Test
+//	@Test
 	public void buscarPorPais(){
 		pais.setId(1);
 		

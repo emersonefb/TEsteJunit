@@ -1,5 +1,7 @@
 package br.com.efb.entity.Pessoa.Documentos;
 
+import java.io.Serializable;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -8,7 +10,12 @@ import javax.persistence.OneToOne;
 import br.com.efb.entity.Pessoa.Pessoa;
 
 @Entity
-public class Documentos {
+public class Documentos implements Serializable{
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 
 	@Id
 	@GeneratedValue
@@ -70,7 +77,7 @@ public class Documentos {
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((cpf == null) ? 0 : cpf.hashCode());
+		result = prime * result + id;
 		return result;
 	}
 
@@ -83,13 +90,9 @@ public class Documentos {
 		if (getClass() != obj.getClass())
 			return false;
 		Documentos other = (Documentos) obj;
-		if (cpf == null) {
-			if (other.cpf != null)
-				return false;
-		} else if (!cpf.equals(other.cpf))
+		if (id != other.id)
 			return false;
 		return true;
 	}
 
-	
 }

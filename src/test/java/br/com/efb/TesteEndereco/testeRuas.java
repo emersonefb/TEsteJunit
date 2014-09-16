@@ -41,7 +41,7 @@ public class testeRuas {
 		assertTrue(ruas.size() != 0);
 	}
 
-//	@Test
+	@Test
 	public void testsalvar() {
 		ruas.setNome("Rua 2");
 		ruas.setCep("09391000");
@@ -83,7 +83,7 @@ public class testeRuas {
 		assertTrue(ruas.getNome().equalsIgnoreCase("Rui Barbosa"));
 	}
 	
-	@Test
+//	@Test
 	public void test() {
 		ruas.setCep("09391000");
 		ruas = ruaDao.buscarPorCEP(ruas);
