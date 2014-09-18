@@ -1,0 +1,43 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head></h:head>
+<body>
+
+	<h:form>
+		<p:panel header="Endereço">
+			<p:growl></p:growl>
+			<p:panelGrid columns="2">
+				<h:outputLabel value="Pais" />
+				<p:inputText value="#{enderecoBean.endereco.numero}" ></p:inputText>
+
+<p:commandButton id="movieBtn" value="Dynamic" type="button" />
+    <p:overlayPanel id="moviePanel" for="movieBtn" hideEffect="fade" dynamic="true" style="width:600px">
+        <p:dataTable var="movies" value="#{movieView.movieList}" rows="5" paginator="true">
+            <p:column headerText="Movie">
+                <h:outputText value="#{movies.movie}" />
+            </p:column>
+ 
+            <p:column headerText="Directed By">
+                <h:outputText value="#{movies.directedBy}" />
+            </p:column>
+ 
+            <p:column headerText="Run Time(min.)">
+                <h:outputText value="#{movies.runTime}" />
+            </p:column>
+        </p:dataTable>
+    </p:overlayPanel>
+
+			</p:panelGrid>
+
+			<p:commandButton value="Enviar" action="#{enderecoBean.salvar}"
+				update="@form">
+			</p:commandButton>
+		</p:panel>
+	</h:form>
+</body>
+</html>
