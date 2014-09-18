@@ -13,8 +13,9 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.transaction.TransactionConfiguration;
 import org.springframework.transaction.annotation.Transactional;
 
-import br.com.efb.Dao.Pessoa.Contato.EmailContatoDao;
 import br.com.efb.Dao.endereco.DAOException;
+import br.com.efb.entity.Dao.Pessoa.Contato.EmailContatoDao;
+//github.com/emersonefb/TEsteJunit.git
 import br.com.efb.entity.Pessoa.Contato.EmailContato;
 
 @RunWith(SpringJUnit4ClassRunner.class)

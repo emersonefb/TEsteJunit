@@ -41,7 +41,7 @@ public class testeRuas {
 		assertTrue(ruas.size() != 0);
 	}
 
-	@Test
+//	@Test
 	public void testsalvar() {
 		ruas.setNome("Rua 2");
 		ruas.setCep("09391000");
@@ -83,10 +83,17 @@ public class testeRuas {
 		assertTrue(ruas.getNome().equalsIgnoreCase("Rui Barbosa"));
 	}
 	
-//	@Test
-	public void test() {
+	@Test
+	public void buscaporCep() {
 		ruas.setCep("09391000");
 		ruas = ruaDao.buscarPorCEP(ruas);
+		System.out.println(ruas.getNome()+" "+ ruas.getBairro().getNome());
+	}
+	
+//	@Test
+	public void buscaPorNome() {
+		ruas.setNome("Rui Barbosa");
+		ruas = ruaDao.buscarPorNome(ruas);
 		System.out.println(ruas.getNome()+" "+ ruas.getBairro().getNome());
 	}
 	

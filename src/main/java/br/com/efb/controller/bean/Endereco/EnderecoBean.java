@@ -10,7 +10,6 @@ import org.springframework.stereotype.Controller;
 
 import br.com.efb.Dao.endereco.DAOException;
 import br.com.efb.entity.endereco.Endereco;
-import br.com.efb.entity.endereco.Pais;
 import br.com.efb.entity.endereco.Ruas;
 import br.com.efb.model.service.Endereco.EnderecoService;
 
@@ -23,8 +22,6 @@ public class EnderecoBean {
 
 	Endereco endereco = new Endereco();
 	
-	Pais pais = new Pais();
-
 	Ruas ruas = new Ruas();
 
 	@PostConstruct
@@ -35,7 +32,6 @@ public class EnderecoBean {
 	}
 
 	public void salvar() {
-		ruas.setId(1);
 		endereco.setRuas(ruas);
 		try {
 			enderecoService.salvar(endereco);

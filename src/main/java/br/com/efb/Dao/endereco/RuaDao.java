@@ -97,6 +97,17 @@ public class RuaDao {
 		ruas = (Ruas) consulta.getSingleResult();
 		return ruas;
 	}
+	
+	/**
+	 * Retorna Rua
+	 * @param ruas
+	 * @return
+	 */
+	public Ruas buscarPorNome(Ruas ruas) {
+		Query consulta = em.createQuery("Select R From Ruas R where R.nome='"+ruas.getNome()+"'");
+		ruas = (Ruas) consulta.getSingleResult();
+		return ruas;
+	}
 
 }
 
