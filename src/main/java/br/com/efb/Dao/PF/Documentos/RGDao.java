@@ -1,4 +1,4 @@
-package br.com.efb.entity.Dao.Pessoa.Contato;
+package br.com.efb.Dao.PF.Documentos;
 
 import java.util.List;
 
@@ -12,25 +12,25 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import br.com.efb.Dao.endereco.DAOException;
-import br.com.efb.entity.Pessoa.Contato.Telefone;
+import br.com.efb.entity.PF.Documentos.RG;
 
 @Repository
-public class TelefoneDao {
+public class RGDao {
 	@PersistenceContext
 	EntityManager em;
 	
 	/**
-	 * Salva Telefone No Banco
-	 * @param telefone
+	 * Salva RG No Banco
+	 * @param rg
 	 * @throws DAOException
 	 */
 	@Transactional
-	public void salvar(Telefone telefone) throws DAOException {
+	public void salvar(RG rg) throws DAOException {
 		try {
-			em.merge(telefone);
+			em.merge(rg);
 		} catch (ConstraintViolationException erro) {
 			// TODO: handle exception
-			JOptionPane.showMessageDialog(null, "Telefone Ja Cadastrado");
+			JOptionPane.showMessageDialog(null, "RG Ja Cadastrado");
 			erro.printStackTrace();
 		} catch (Exception causa) {
 			throw new DAOException("Nao foi possivel Cadastrado", causa);
@@ -39,45 +39,45 @@ public class TelefoneDao {
 	}
 
 	/**
-	 * Lista Todos os Telefones
+	 * Lista Todos os RGs
 	 * 
-	 * @return Lista de Telefones
+	 * @return Lista de RGs
 	 */
 	@SuppressWarnings("unchecked")
 	@Transactional
-	public List<Telefone> listaTelefones() {
-		Query consulta = em.createQuery("select B from Telefone B");
+	public List<RG> listaRGs() {
+		Query consulta = em.createQuery("select R from RG R");
 		return consulta.getResultList();
 
 	}
 
 	/**
-	 * Busca Um Telefone Especifica
-	 * @param telefone
-	 * @return uma telefone
+	 * Busca Um RG Especifica
+	 * @param rg
+	 * @return uma rg
 	 * @throws DAOException 
 	 */
 	@Transactional
-	public Telefone buscarPorId(Telefone telefone) throws DAOException {
+	public RG buscarPorId(RG rg) throws DAOException {
 		try {
-			telefone = em.find(Telefone.class, telefone.getId());
+			rg = em.find(RG.class, rg.getId());
 		} catch (Exception causa) {
 			throw new DAOException("Nao foi possivel Encontrar", causa);
 		}
-		return telefone;
+		return rg;
 
 	}
 
 	/**
-	 * exclui um Telefone
-	 * @param Telefone
+	 * exclui um RG
+	 * @param RG
 	 * @throws DAOException
 	 */
 	@Transactional
-	public void excluir(Telefone telefone) throws DAOException {
+	public void excluir(RG rg) throws DAOException {
 		try {
-			telefone = buscarPorId(telefone);
-			em.remove(telefone);
+			rg = buscarPorId(rg);
+			em.remove(rg);
 
 		} catch (Exception causa) {
 			throw new DAOException("Nao foi possivel Excluir", causa);

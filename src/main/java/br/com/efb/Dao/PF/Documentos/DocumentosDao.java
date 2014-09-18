@@ -1,4 +1,4 @@
-package br.com.efb.entity.Dao.Pessoa.Documentos;
+package br.com.efb.Dao.PF.Documentos;
 
 import java.util.List;
 
@@ -12,25 +12,26 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import br.com.efb.Dao.endereco.DAOException;
-import br.com.efb.entity.Pessoa.Documentos.CPF;
+import br.com.efb.entity.PF.Documentos.DocumentosPF;
 
 @Repository
-public class CPFDao {
+public class DocumentosDao {
+
 	@PersistenceContext
 	EntityManager em;
 	
 	/**
-	 * Salva CPF No Banco
-	 * @param cpf
+	 * Salva Documentos No Banco
+	 * @param documentos
 	 * @throws DAOException
 	 */
 	@Transactional
-	public void salvar(CPF cpf) throws DAOException {
+	public void salvar(DocumentosPF documentos) throws DAOException {
 		try {
-			em.merge(cpf);
+			em.merge(documentos);
 		} catch (ConstraintViolationException erro) {
 			// TODO: handle exception
-			JOptionPane.showMessageDialog(null, "CPF Ja Cadastrado");
+			JOptionPane.showMessageDialog(null, "Documentos Ja Cadastrado");
 			erro.printStackTrace();
 		} catch (Exception causa) {
 			throw new DAOException("Nao foi possivel Cadastrado", causa);
@@ -39,49 +40,50 @@ public class CPFDao {
 	}
 
 	/**
-	 * Lista Todos os CPFs
+	 * Lista Todos os Documentoss
 	 * 
-	 * @return Lista de CPFs
+	 * @return Lista de Documentoss
 	 */
 	@SuppressWarnings("unchecked")
 	@Transactional
-	public List<CPF> listaCPFs() {
-		Query consulta = em.createQuery("select B from CPF B");
+	public List<DocumentosPF> listaDocumentos() {
+		Query consulta = em.createQuery("select D from DocumentosPF D");
 		return consulta.getResultList();
 
 	}
 
 	/**
-	 * Busca Um CPF Especifica
-	 * @param cpf
-	 * @return uma cpf
+	 * Busca Um Documentos Especifica
+	 * @param documentos
+	 * @return uma documentos
 	 * @throws DAOException 
 	 */
 	@Transactional
-	public CPF buscarPorId(CPF cpf) throws DAOException {
+	public DocumentosPF buscarPorId(DocumentosPF documentos) throws DAOException {
 		try {
-			cpf = em.find(CPF.class, cpf.getId());
+			documentos = em.find(DocumentosPF.class, documentos.getId());
 		} catch (Exception causa) {
 			throw new DAOException("Nao foi possivel Encontrar", causa);
 		}
-		return cpf;
+		return documentos;
 
 	}
 
 	/**
-	 * exclui um CPF
-	 * @param CPF
+	 * exclui um Documentos
+	 * @param DocumentosPF
 	 * @throws DAOException
 	 */
 	@Transactional
-	public void excluir(CPF cpf) throws DAOException {
+	public void excluir(DocumentosPF documentos) throws DAOException {
 		try {
-			cpf = buscarPorId(cpf);
-			em.remove(cpf);
+			documentos = buscarPorId(documentos);
+			em.remove(documentos);
 
 		} catch (Exception causa) {
 			throw new DAOException("Nao foi possivel Excluir", causa);
 		}
 
 	}
+
 }

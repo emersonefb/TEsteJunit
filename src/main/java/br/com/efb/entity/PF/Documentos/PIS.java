@@ -1,4 +1,4 @@
-package br.com.efb.entity.Pessoa.Documentos;
+package br.com.efb.entity.PF.Documentos;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -17,7 +17,7 @@ public class PIS {
 	private String numero;
 
 	@OneToOne(mappedBy = "pis")
-	private Documentos documentos;
+	private DocumentosPF documentos;
 
 	public int getId() {
 		return id;
@@ -35,11 +35,11 @@ public class PIS {
 		this.numero = numero;
 	}
 
-	public Documentos getDocumentos() {
+	public DocumentosPF getDocumentos() {
 		return documentos;
 	}
 
-	public void setDocumentos(Documentos documentos) {
+	public void setDocumentos(DocumentosPF documentos) {
 		this.documentos = documentos;
 	}
 

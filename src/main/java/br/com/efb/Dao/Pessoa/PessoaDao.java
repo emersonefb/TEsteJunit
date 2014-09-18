@@ -1,4 +1,4 @@
-package br.com.efb.entity.Dao.Pessoa.Documentos;
+package br.com.efb.Dao.Pessoa;
 
 import java.util.List;
 
@@ -12,26 +12,27 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import br.com.efb.Dao.endereco.DAOException;
-import br.com.efb.entity.Pessoa.Documentos.Documentos;
+import br.com.efb.entity.Pessoa.Pessoa;
+
 
 @Repository
-public class DocumentosDao {
+public class PessoaDao {
 
 	@PersistenceContext
 	EntityManager em;
 	
 	/**
-	 * Salva Documentos No Banco
-	 * @param documentos
+	 * Salva Pessoa No Banco
+	 * @param pessoa
 	 * @throws DAOException
 	 */
 	@Transactional
-	public void salvar(Documentos documentos) throws DAOException {
+	public void salvar(Pessoa pessoa) throws DAOException {
 		try {
-			em.merge(documentos);
+			em.merge(pessoa);
 		} catch (ConstraintViolationException erro) {
 			// TODO: handle exception
-			JOptionPane.showMessageDialog(null, "Documentos Ja Cadastrado");
+			JOptionPane.showMessageDialog(null, "Pessoa Ja Cadastrado");
 			erro.printStackTrace();
 		} catch (Exception causa) {
 			throw new DAOException("Nao foi possivel Cadastrado", causa);
@@ -40,45 +41,45 @@ public class DocumentosDao {
 	}
 
 	/**
-	 * Lista Todos os Documentoss
+	 * Lista Todos os Pessoas
 	 * 
-	 * @return Lista de Documentoss
+	 * @return Lista de Pessoas
 	 */
 	@SuppressWarnings("unchecked")
 	@Transactional
-	public List<Documentos> listaDocumentos() {
-		Query consulta = em.createQuery("select R from Documentos R");
+	public List<Pessoa> listaPessoas() {
+		Query consulta = em.createQuery("select P from Pessoa P");
 		return consulta.getResultList();
 
 	}
 
 	/**
-	 * Busca Um Documentos Especifica
-	 * @param documentos
-	 * @return uma documentos
+	 * Busca Um Pessoa Especifica
+	 * @param pessoa
+	 * @return uma pessoa
 	 * @throws DAOException 
 	 */
 	@Transactional
-	public Documentos buscarPorId(Documentos documentos) throws DAOException {
+	public Pessoa buscarPorId(Pessoa pessoa) throws DAOException {
 		try {
-			documentos = em.find(Documentos.class, documentos.getId());
+			pessoa = em.find(Pessoa.class, pessoa.getId());
 		} catch (Exception causa) {
 			throw new DAOException("Nao foi possivel Encontrar", causa);
 		}
-		return documentos;
+		return pessoa;
 
 	}
 
 	/**
-	 * exclui um Documentos
-	 * @param Documentos
+	 * exclui um Pessoa
+	 * @param Pessoa
 	 * @throws DAOException
 	 */
 	@Transactional
-	public void excluir(Documentos documentos) throws DAOException {
+	public void excluir(Pessoa pessoa) throws DAOException {
 		try {
-			documentos = buscarPorId(documentos);
-			em.remove(documentos);
+			pessoa = buscarPorId(pessoa);
+			em.remove(pessoa);
 
 		} catch (Exception causa) {
 			throw new DAOException("Nao foi possivel Excluir", causa);

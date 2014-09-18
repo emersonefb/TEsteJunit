@@ -1,4 +1,4 @@
-package br.com.efb.entity.Dao.Pessoa.Contato;
+package br.com.efb.Dao.Pessoa.Contato;
 
 import java.util.List;
 
@@ -12,25 +12,25 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import br.com.efb.Dao.endereco.DAOException;
-import br.com.efb.entity.Pessoa.Contato.EmailContato;
+import br.com.efb.entity.Pessoa.Contato.Celular;
 
 @Repository
-public class EmailContatoDao {
+public class CelularDao {
 	@PersistenceContext
 	EntityManager em;
 	
 	/**
-	 * Salva EmailContato No Banco
-	 * @param emailContato
+	 * Salva Celular No Banco
+	 * @param celular
 	 * @throws DAOException
 	 */
 	@Transactional
-	public void salvar(EmailContato emailContato) throws DAOException {
+	public void salvar(Celular celular) throws DAOException {
 		try {
-			em.merge(emailContato);
+			em.merge(celular);
 		} catch (ConstraintViolationException erro) {
 			// TODO: handle exception
-			JOptionPane.showMessageDialog(null, "EmailContato Ja Cadastrado");
+			JOptionPane.showMessageDialog(null, "Celular Ja Cadastrado");
 			erro.printStackTrace();
 		} catch (Exception causa) {
 			throw new DAOException("Nao foi possivel Cadastrado", causa);
@@ -39,45 +39,45 @@ public class EmailContatoDao {
 	}
 
 	/**
-	 * Lista Todos os EmailContatos
+	 * Lista Todos os Celulars
 	 * 
-	 * @return Lista de EmailContatos
+	 * @return Lista de Celulars
 	 */
 	@SuppressWarnings("unchecked")
 	@Transactional
-	public List<EmailContato> listaEmailContatos() {
-		Query consulta = em.createQuery("select B from EmailContato B");
+	public List<Celular> listaCelulars() {
+		Query consulta = em.createQuery("select B from Celular B");
 		return consulta.getResultList();
 
 	}
 
 	/**
-	 * Busca Um EmailContato Especifica
-	 * @param emailContato
-	 * @return uma emailContato
+	 * Busca Um Celular Especifica
+	 * @param celular
+	 * @return uma celular
 	 * @throws DAOException 
 	 */
 	@Transactional
-	public EmailContato buscarPorId(EmailContato emailContato) throws DAOException {
+	public Celular buscarPorId(Celular celular) throws DAOException {
 		try {
-			emailContato = em.find(EmailContato.class, emailContato.getId());
+			celular = em.find(Celular.class, celular.getId());
 		} catch (Exception causa) {
 			throw new DAOException("Nao foi possivel Encontrar", causa);
 		}
-		return emailContato;
+		return celular;
 
 	}
 
 	/**
-	 * exclui um EmailContato
-	 * @param EmailContato
+	 * exclui um Celular
+	 * @param Celular
 	 * @throws DAOException
 	 */
 	@Transactional
-	public void excluir(EmailContato emailContato) throws DAOException {
+	public void excluir(Celular celular) throws DAOException {
 		try {
-			emailContato = buscarPorId(emailContato);
-			em.remove(emailContato);
+			celular = buscarPorId(celular);
+			em.remove(celular);
 
 		} catch (Exception causa) {
 			throw new DAOException("Nao foi possivel Excluir", causa);

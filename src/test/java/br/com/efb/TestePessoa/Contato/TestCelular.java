@@ -13,8 +13,8 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.transaction.TransactionConfiguration;
 import org.springframework.transaction.annotation.Transactional;
 
+import br.com.efb.Dao.Pessoa.Contato.CelularDao;
 import br.com.efb.Dao.endereco.DAOException;
-import br.com.efb.entity.Dao.Pessoa.Contato.CelularDao;
 import br.com.efb.entity.Pessoa.Contato.Celular;
 
 @RunWith(SpringJUnit4ClassRunner.class)

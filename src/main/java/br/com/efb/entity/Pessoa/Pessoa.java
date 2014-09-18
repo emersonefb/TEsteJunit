@@ -1,17 +1,12 @@
 package br.com.efb.entity.Pessoa;
 
-import java.util.Date;
-
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 
 import br.com.efb.entity.Pessoa.Contato.Contato;
-import br.com.efb.entity.Pessoa.Documentos.Documentos;
 import br.com.efb.entity.endereco.Endereco;
-
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToOne;
 
 @Entity
 public class Pessoa {
@@ -20,16 +15,11 @@ public class Pessoa {
 	@GeneratedValue
 	private int id;
 	
+	private String tipodePessoa;
+	
 	private String nome;
 	
 	private String nomeCompleto;
-	
-	private String sexo;
-	
-	private Date dataDeNascimento; 
-	
-	@OneToOne()
-	private  Documentos documentos;
 	
 	@ManyToOne
 	private Endereco enderecos;
@@ -43,6 +33,14 @@ public class Pessoa {
 
 	public void setId(int id) {
 		this.id = id;
+	}
+
+	public String getTipodePessoa() {
+		return tipodePessoa;
+	}
+
+	public void setTipodePessoa(String tipodePessoa) {
+		this.tipodePessoa = tipodePessoa;
 	}
 
 	public String getNome() {
@@ -61,29 +59,6 @@ public class Pessoa {
 		this.nomeCompleto = nomeCompleto;
 	}
 
-	public String getSexo() {
-		return sexo;
-	}
-
-	public void setSexo(String sexo) {
-		this.sexo = sexo;
-	}
-
-	public Date getDataDeNascimento() {
-		return dataDeNascimento;
-	}
-
-	public void setDataDeNascimento(Date dataDeNascimento) {
-		this.dataDeNascimento = dataDeNascimento;
-	}
-
-	public Documentos getDocumentos() {
-		return documentos;
-	}
-
-	public void setDocumentos(Documentos documentos) {
-		this.documentos = documentos;
-	}
 
 	public Endereco getEnderecos() {
 		return enderecos;
@@ -122,8 +97,5 @@ public class Pessoa {
 			return false;
 		return true;
 	}
-	
-	
-
 
 }

@@ -13,9 +13,9 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.transaction.TransactionConfiguration;
 import org.springframework.transaction.annotation.Transactional;
 
+import br.com.efb.Dao.PF.Documentos.RGDao;
 import br.com.efb.Dao.endereco.DAOException;
-import br.com.efb.entity.Dao.Pessoa.Documentos.RGDao;
-import br.com.efb.entity.Pessoa.Documentos.RG;
+import br.com.efb.entity.PF.Documentos.RG;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = { "file:src/main/webapp/WEB-INF/applicationContext.xml" })

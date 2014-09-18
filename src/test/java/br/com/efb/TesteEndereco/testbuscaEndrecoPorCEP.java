@@ -27,7 +27,7 @@ public class testbuscaEndrecoPorCEP {
 	@Test
 	public void test() {
 
-		ruas.setCep("09390000");
+		ruas.setCep("09391000");
 		ruas = ruaDao.buscarPorCEP(ruas);
 
 		System.out.println(ruas.getNome() + " " + ruas.getBairro().getNome());

@@ -11,11 +11,11 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.transaction.TransactionConfiguration;
 import org.springframework.transaction.annotation.Transactional;
 
+import br.com.efb.Dao.PF.Documentos.DocumentosDao;
 import br.com.efb.Dao.endereco.DAOException;
-import br.com.efb.entity.Dao.Pessoa.Documentos.DocumentosDao;
-import br.com.efb.entity.Pessoa.Documentos.CPF;
-import br.com.efb.entity.Pessoa.Documentos.Documentos;
-import br.com.efb.entity.Pessoa.Documentos.RG;
+import br.com.efb.entity.PF.Documentos.CPF;
+import br.com.efb.entity.PF.Documentos.DocumentosPF;
+import br.com.efb.entity.PF.Documentos.RG;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = { "file:src/main/webapp/WEB-INF/applicationContext.xml" })
@@ -26,7 +26,7 @@ public class TestDocumentos {
 	@Inject 
 	DocumentosDao documentosDao;
 	
-	Documentos documentos = new Documentos();
+	DocumentosPF documentos = new DocumentosPF();
 	CPF cpf = new CPF();
 	RG rg = new RG();
 
@@ -34,7 +34,7 @@ public class TestDocumentos {
 	/**
 	 * teste Salva Documentos
 	 */
-//	@Test
+	@Test
 	public void Salvar() {
 		
 		cpf.setId(1);
@@ -53,8 +53,8 @@ public class TestDocumentos {
 	 */
 	@Test
 	public void BuscarTodos(){
-		List<Documentos> documentos = documentosDao.listaDocumentos();
-		for (Documentos documentos2 : documentos) {
+		List<DocumentosPF> documentos = documentosDao.listaDocumentos();
+		for (DocumentosPF documentos2 : documentos) {
 			System.out.println("Nº RG: "+ documentos2.getRg().getNumero());
 		}
 		

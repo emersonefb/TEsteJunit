@@ -1,4 +1,4 @@
-package br.com.efb.entity.Pessoa.Documentos;
+package br.com.efb.entity.PF.Documentos;
 
 import java.io.Serializable;
 
@@ -7,10 +7,10 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
 
-import br.com.efb.entity.Pessoa.Pessoa;
+import br.com.efb.entity.Pessoa.PessoaFisica;
 
 @Entity
-public class Documentos implements Serializable{
+public class DocumentosPF implements Serializable{
 
 	/**
 	 * 
@@ -30,8 +30,8 @@ public class Documentos implements Serializable{
 	@OneToOne()
 	private PIS pis;
 	
-	@OneToOne(mappedBy = "documentos")
-	private Pessoa pessoa;
+	@OneToOne(mappedBy = "documentosPF")
+	private PessoaFisica pessoaFisica;
 
 	public int getId() {
 		return id;
@@ -65,12 +65,12 @@ public class Documentos implements Serializable{
 		this.pis = pis;
 	}
 
-	public Pessoa getPessoa() {
-		return pessoa;
+	public PessoaFisica getPessoaFisica() {
+		return pessoaFisica;
 	}
 
-	public void setPessoa(Pessoa pessoa) {
-		this.pessoa = pessoa;
+	public void setPessoaFisica(PessoaFisica pessoaFisica) {
+		this.pessoaFisica = pessoaFisica;
 	}
 
 	@Override
@@ -89,7 +89,7 @@ public class Documentos implements Serializable{
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Documentos other = (Documentos) obj;
+		DocumentosPF other = (DocumentosPF) obj;
 		if (id != other.id)
 			return false;
 		return true;

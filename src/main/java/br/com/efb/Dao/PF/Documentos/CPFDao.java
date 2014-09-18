@@ -1,4 +1,4 @@
-package br.com.efb.entity.Dao.Pessoa;
+package br.com.efb.Dao.PF.Documentos;
 
 import java.util.List;
 
@@ -12,27 +12,25 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import br.com.efb.Dao.endereco.DAOException;
-import br.com.efb.entity.Pessoa.Pessoa;
-
+import br.com.efb.entity.PF.Documentos.CPF;
 
 @Repository
-public class PessoaDao {
-
+public class CPFDao {
 	@PersistenceContext
 	EntityManager em;
 	
 	/**
-	 * Salva Pessoa No Banco
-	 * @param pessoa
+	 * Salva CPF No Banco
+	 * @param cpf
 	 * @throws DAOException
 	 */
 	@Transactional
-	public void salvar(Pessoa pessoa) throws DAOException {
+	public void salvar(CPF cpf) throws DAOException {
 		try {
-			em.merge(pessoa);
+			em.merge(cpf);
 		} catch (ConstraintViolationException erro) {
 			// TODO: handle exception
-			JOptionPane.showMessageDialog(null, "Pessoa Ja Cadastrado");
+			JOptionPane.showMessageDialog(null, "CPF Ja Cadastrado");
 			erro.printStackTrace();
 		} catch (Exception causa) {
 			throw new DAOException("Nao foi possivel Cadastrado", causa);
@@ -41,50 +39,49 @@ public class PessoaDao {
 	}
 
 	/**
-	 * Lista Todos os Pessoas
+	 * Lista Todos os CPFs
 	 * 
-	 * @return Lista de Pessoas
+	 * @return Lista de CPFs
 	 */
 	@SuppressWarnings("unchecked")
 	@Transactional
-	public List<Pessoa> listaPessoas() {
-		Query consulta = em.createQuery("select B from Pessoa B");
+	public List<CPF> listaCPFs() {
+		Query consulta = em.createQuery("select B from CPF B");
 		return consulta.getResultList();
 
 	}
 
 	/**
-	 * Busca Um Pessoa Especifica
-	 * @param pessoa
-	 * @return uma pessoa
+	 * Busca Um CPF Especifica
+	 * @param cpf
+	 * @return uma cpf
 	 * @throws DAOException 
 	 */
 	@Transactional
-	public Pessoa buscarPorId(Pessoa pessoa) throws DAOException {
+	public CPF buscarPorId(CPF cpf) throws DAOException {
 		try {
-			pessoa = em.find(Pessoa.class, pessoa.getId());
+			cpf = em.find(CPF.class, cpf.getId());
 		} catch (Exception causa) {
 			throw new DAOException("Nao foi possivel Encontrar", causa);
 		}
-		return pessoa;
+		return cpf;
 
 	}
 
 	/**
-	 * exclui um Pessoa
-	 * @param Pessoa
+	 * exclui um CPF
+	 * @param CPF
 	 * @throws DAOException
 	 */
 	@Transactional
-	public void excluir(Pessoa pessoa) throws DAOException {
+	public void excluir(CPF cpf) throws DAOException {
 		try {
-			pessoa = buscarPorId(pessoa);
-			em.remove(pessoa);
+			cpf = buscarPorId(cpf);
+			em.remove(cpf);
 
 		} catch (Exception causa) {
 			throw new DAOException("Nao foi possivel Excluir", causa);
 		}
 
 	}
-
 }

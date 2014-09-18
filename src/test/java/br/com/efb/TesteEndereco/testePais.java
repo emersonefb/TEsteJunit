@@ -42,7 +42,7 @@ public class testePais {
 	@Test
 	public void testsalvar() {
 		pais.setId(1);
-		pais.setNome("Argentina");
+		pais.setNome("Brasil");
 
 		try {
 			paisDao.salvar(pais);

@@ -13,9 +13,9 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.transaction.TransactionConfiguration;
 import org.springframework.transaction.annotation.Transactional;
 
+import br.com.efb.Dao.PF.Documentos.CPFDao;
 import br.com.efb.Dao.endereco.DAOException;
-import br.com.efb.entity.Dao.Pessoa.Documentos.CPFDao;
-import br.com.efb.entity.Pessoa.Documentos.CPF;
+import br.com.efb.entity.PF.Documentos.CPF;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = { "file:src/main/webapp/WEB-INF/applicationContext.xml" })
@@ -31,7 +31,7 @@ public class TestCPF {
 	/**
 	 * Teste para salvar numero de CPF
 	 */
-//	@Test
+	@Test
 	public void Salvar() {
 		cpf.setNumero("123456789-01");
 
