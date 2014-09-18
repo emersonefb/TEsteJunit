@@ -16,6 +16,7 @@ public class EnderecoService {
 	
 	public void salvar(Endereco endereco) throws DAOException {
 		enderecoDao.salvar(endereco);
+//		1
 	}
 
 }
