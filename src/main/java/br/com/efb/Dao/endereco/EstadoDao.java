@@ -11,6 +11,7 @@ import org.hibernate.exception.ConstraintViolationException;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
+import br.com.efb.entity.endereco.Cidade;
 import br.com.efb.entity.endereco.Estado;
 import br.com.efb.entity.endereco.Pais;
 
@@ -93,6 +94,12 @@ public class EstadoDao {
 	public List<Estado> buscarPorPais(Pais pais) {
 		Query consulta =em.createQuery("Select E from Estado E where E.pais ="+pais.getId());
 		return consulta.getResultList();
+	}
+
+	public Estado buscarPorNome(Estado estado) {
+		Query consulta = em.createQuery("Select E From Estado E where E.nome='"+estado.getNome()+"'");
+		estado = (Estado) consulta.getSingleResult();
+		return estado;
 	}
 }
 

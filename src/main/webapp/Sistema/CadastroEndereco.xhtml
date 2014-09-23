@@ -12,29 +12,28 @@
 		<p:panel header="Endereço">
 			<p:growl></p:growl>
 			<p:panelGrid columns="2">
+			
+			
+				<h:outputLabel value="CEP" />
+				<p:inputText value="#{enderecoBean.ruas.cep}"  />
+
+				<h:outputLabel value="Rua" />
+				<h:outputLabel value="#{enderecoBean.endereco.ruas.nome}" />
+				
+				<h:outputLabel value="Bairro" />
+				<h:outputLabel value="#{enderecoBean.endereco.ruas.bairro.nome}" />
+				
+				<h:outputLabel value="Cidade" />
+				<h:outputLabel value="#{enderecoBean.endereco.ruas.bairro.cidade.nome}" />
+				
+				<h:outputLabel value="Estado" />
+				<h:outputLabel value="#{enderecoBean.endereco.ruas.bairro.cidade.estado.nome}" />
+				
 				<h:outputLabel value="Pais" />
-				<p:inputText value="#{enderecoBean.endereco.numero}" ></p:inputText>
-
-<p:commandButton id="movieBtn" value="Dynamic" type="button" />
-    <p:overlayPanel id="moviePanel" for="movieBtn" hideEffect="fade" dynamic="true" style="width:600px">
-        <p:dataTable var="movies" value="#{movieView.movieList}" rows="5" paginator="true">
-            <p:column headerText="Movie">
-                <h:outputText value="#{movies.movie}" />
-            </p:column>
- 
-            <p:column headerText="Directed By">
-                <h:outputText value="#{movies.directedBy}" />
-            </p:column>
- 
-            <p:column headerText="Run Time(min.)">
-                <h:outputText value="#{movies.runTime}" />
-            </p:column>
-        </p:dataTable>
-    </p:overlayPanel>
-
+				<h:outputLabel value="#{enderecoBean.endereco.ruas.bairro.cidade.estado.pais.nome}" />
 			</p:panelGrid>
 
-			<p:commandButton value="Enviar" action="#{enderecoBean.salvar}"
+			<p:commandButton value="Enviar" action="#{enderecoBean.buscarCep}"
 				update="@form">
 			</p:commandButton>
 		</p:panel>

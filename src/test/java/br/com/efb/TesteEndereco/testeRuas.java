@@ -70,7 +70,7 @@ public class testeRuas {
 
 //	@Test
 	public void buscarporID(){
-		ruas.setId(21);
+		ruas.setId(1);
 		try {
 			ruas = ruaDao.buscarPorId(ruas);
 		} catch (DAOException e) {
@@ -80,7 +80,7 @@ public class testeRuas {
 		System.out.println(ruas.getNome());
 		
 		
-		assertTrue(ruas.getNome().equalsIgnoreCase("Rui Barbosa"));
+		assertTrue(ruas.getNome().equalsIgnoreCase("Rua 2"));
 	}
 	
 //	@Test

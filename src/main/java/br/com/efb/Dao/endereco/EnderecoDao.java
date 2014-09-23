@@ -12,6 +12,7 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import br.com.efb.entity.endereco.Endereco;
+import br.com.efb.entity.endereco.Ruas;
 
 @Repository
 public class EnderecoDao {
@@ -74,6 +75,11 @@ public class EnderecoDao {
 			throw new DAOException("Nao foi possivel Encontrar", causa);
 		}
 		return endereco;
+	}
+
+	public Endereco buscarPorRua(Endereco endereco) {
+		Query consulta = em.createQuery("Select E from Endereco E where E.ruas.id ="+endereco.getRuas().getId()+"and E.numero = 10");
+		return  (Endereco) consulta.getSingleResult();
 	}
 
 }

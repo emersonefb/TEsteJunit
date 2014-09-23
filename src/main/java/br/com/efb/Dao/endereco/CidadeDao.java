@@ -12,6 +12,7 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import br.com.efb.entity.endereco.Cidade;
+import br.com.efb.entity.endereco.Pais;
 
 @Repository
 public class CidadeDao {
@@ -85,6 +86,12 @@ public class CidadeDao {
 			throw new DAOException("Nao foi possivel Excluir", causa);
 		}
 
+	}
+
+	public Cidade buscarPorNome(Cidade cidade) {
+			Query consulta = em.createQuery("Select C From Cidade C where C.nome='"+cidade.getNome()+"'");
+			cidade = (Cidade) consulta.getSingleResult();
+			return cidade;
 	}
 
 }

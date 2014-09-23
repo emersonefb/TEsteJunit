@@ -1,0 +1,42 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"> 
+
+<h:head></h:head> 
+<body>
+<h:form>
+<p:panel>
+<p:panelGrid columns="2">
+
+<h:outputLabel value="Pais:" />
+<p:inputText value="#{enderecoBean.pais.nome}"/>
+
+<h:outputLabel value="Estado:" />
+<p:inputText value="#{enderecoBean.estado.nome}"/>
+
+<h:outputLabel value="Cidade:" />
+<p:inputText value="#{enderecoBean.cidade.nome}"/>
+
+<h:outputLabel value="Bairro:" />
+<p:inputText value="#{enderecoBean.bairro.nome}"/>
+
+<h:outputLabel value="Rua:" />
+<p:inputText value="#{enderecoBean.ruas.nome}"/>
+
+<h:outputLabel value="CEP:" />
+<p:inputText value="#{enderecoBean.ruas.cep}"/>
+
+</p:panelGrid>
+
+<p:commandButton value="Enviar" action="#{enderecoBean.salvar}"
+				update="@form">
+				</p:commandButton>
+
+</p:panel>
+</h:form> 
+
+</body> 
+</html>

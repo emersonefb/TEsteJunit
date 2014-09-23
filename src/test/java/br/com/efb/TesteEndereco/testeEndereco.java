@@ -1,4 +1,5 @@
 package br.com.efb.TesteEndereco;
+
 import static org.junit.Assert.assertTrue;
 
 import java.util.List;
@@ -30,7 +31,7 @@ public class testeEndereco {
 	Ruas ruas = new Ruas();
 	Endereco endereco = new Endereco();
 
-	@Test
+	// @Test
 	public void test() {
 
 		List<Endereco> enderecos = enderecoDao.listaEnderecos();
@@ -55,7 +56,7 @@ public class testeEndereco {
 		assertTrue(enderecos.size() != 0);
 	}
 
-	 @Test
+	// @Test
 	public void testsalvar() {
 		ruas.setId(1);
 		endereco.setNumero(10);
@@ -90,9 +91,18 @@ public class testeEndereco {
 			e.printStackTrace();
 		}
 		System.out.println(endereco.getNumero());
+		System.out.println(endereco.getRuas().getNome());
 
-		assertTrue(endereco.getRuas().getBairro().getNome()
-				.equalsIgnoreCase("Boa Vista"));
+		// assertTrue(endereco.getRuas().getBairro().getNome()
+		// .equalsIgnoreCase("Boa Vista"));
 	}
 
+	@Test
+	public void buscaporRua() {
+		ruas.setId(3);
+		endereco.setRuas(ruas);
+
+		endereco = enderecoDao.buscarPorRua(endereco);
+			System.out.println(endereco.getRuas().getNome());
+	}
 }

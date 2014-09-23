@@ -64,7 +64,7 @@ public class PaisDao {
 		try {
 			pais = em.find(Pais.class, pais.getId());
 		} catch (Exception causa) {
-			throw new DAOException("N�o foi possivel Encontrar", causa);
+			throw new DAOException("Nao foi possivel Encontrar", causa);
 		}
 		return pais;
 
@@ -82,9 +82,15 @@ public class PaisDao {
 			em.remove(pais);
 
 		} catch (Exception causa) {
-			throw new DAOException("N�o foi possivel Excluir", causa);
+			throw new DAOException("Nao foi possivel Excluir", causa);
 		}
 
+	}
+
+	public Pais buscarPorNome(Pais pais) {
+		Query consulta = em.createQuery("Select P From Pais P where P.nome='"+pais.getNome()+"'");
+		pais = (Pais) consulta.getSingleResult();
+		return pais;
 	}
 
 }
