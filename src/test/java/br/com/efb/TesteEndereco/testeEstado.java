@@ -1,11 +1,12 @@
 package br.com.efb.TesteEndereco;
 
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
 
 import java.util.List;
 
 import javax.inject.Inject;
 
+import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.test.context.ContextConfiguration;
@@ -18,7 +19,6 @@ import br.com.efb.Dao.endereco.EstadoDao;
 import br.com.efb.entity.endereco.Estado;
 import br.com.efb.entity.endereco.Pais;
 
-//@RunWith(JUnit4.class)
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = { "file:src/main/webapp/WEB-INF/applicationContext.xml" })
 @TransactionConfiguration(transactionManager = "transactionManager", defaultRollback = false)
@@ -32,7 +32,7 @@ public class testeEstado {
 	
 	Estado estado = new Estado();
 	
-//	@Test
+	@Test
 	public void testeBuscarTodos() {
 
 		List<Estado> estados = estadoDao.listaEstado();
@@ -45,15 +45,18 @@ public class testeEstado {
 	@Test
 	public void testsalvar() {
 		pais.setId(1);
-		estado.setNome("Sao Paulo");
+		estado.setNome("Rio");
 		estado.setPais(pais);
-
-		try {
-			estadoDao.salvar(estado);
-		} catch (DAOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		estado = estadoDao.buscarPorNome(estado);
+			try {
+				estadoDao.salvar(estado);
+			} catch (DAOException e) {
+				estado = estadoDao.buscarPorNome(estado);
+			}
+		
+		estado = estadoDao.buscarPorNome(estado);
+		
+		assertEquals("Rio", estado.getNome());
 	}
 
 //	@Test
@@ -68,7 +71,7 @@ public class testeEstado {
 		
 	}
 
-//	@Test
+	@Test
 	public void buscarporID(){
 		estado.setId(1);
 		try {
@@ -83,18 +86,13 @@ public class testeEstado {
 		assertTrue(estado.getPais().getNome().equalsIgnoreCase("Brasil"));
 	}
 	
-//	@Test
+	@Test
 	public void buscarPorPais(){
 		pais.setId(1);
 		
 		List<Estado>estados = estadoDao.buscarPorPais(pais);
 		
-		for (Estado estado : estados) {
-			System.out.println("Estado: "+estado.getNome()+"\t Pais:" +estado.getPais().getNome());
-			
-		}
-		
-		assertTrue(estado.getPais().equals(pais));
+		assertEquals("Brasil",estados.get(0).getPais().getNome());
 	}
 	
 }

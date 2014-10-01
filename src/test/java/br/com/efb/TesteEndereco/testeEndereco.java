@@ -31,7 +31,7 @@ public class testeEndereco {
 	Ruas ruas = new Ruas();
 	Endereco endereco = new Endereco();
 
-	// @Test
+	 @Test
 	public void test() {
 
 		List<Endereco> enderecos = enderecoDao.listaEnderecos();
@@ -56,7 +56,7 @@ public class testeEndereco {
 		assertTrue(enderecos.size() != 0);
 	}
 
-	// @Test
+	 @Test
 	public void testsalvar() {
 		ruas.setId(1);
 		endereco.setNumero(10);
@@ -81,7 +81,7 @@ public class testeEndereco {
 
 	}
 
-	// @Test
+	 @Test
 	public void buscarporID() {
 		endereco.setId(1);
 		try {
@@ -99,7 +99,7 @@ public class testeEndereco {
 
 	@Test
 	public void buscaporRua() {
-		ruas.setId(3);
+		ruas.setId(1);
 		endereco.setRuas(ruas);
 
 		endereco = enderecoDao.buscarPorRua(endereco);

@@ -1,6 +1,6 @@
 package br.com.efb.TesteEndereco;
 
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
 
 import java.util.List;
 
@@ -41,13 +41,15 @@ public class testeRuas {
 		assertTrue(ruas.size() != 0);
 	}
 
-//	@Test
+	@Test
 	public void testsalvar() {
 		ruas.setNome("Rua 2");
 		ruas.setCep("09391000");
 		bairro.setId(1);
 		ruas.setBairro(bairro );
 
+		ruas = ruaDao.buscarPorCEP(ruas);
+		
 		try {
 			ruaDao.salvar(ruas);
 		} catch (DAOException e) {
@@ -80,14 +82,13 @@ public class testeRuas {
 		System.out.println(ruas.getNome());
 		
 		
-		assertTrue(ruas.getNome().equalsIgnoreCase("Rua 2"));
+		assertEquals("Rua 2",ruas.getNome());
 	}
 	
 	@Test
 	public void test() {
 		ruas.setCep("09391000");
 		ruas = ruaDao.buscarPorCEP(ruas);
-		System.out.println(ruas.getNome()+" "+ ruas.getBairro().getNome());
 	}
 	
 	@Test
@@ -98,7 +99,7 @@ public class testeRuas {
 			System.out.println(ruas.getNome()+" "+ ruas.getBairro().getNome());
 		}
 		
-//		assertTrue(list.size() < 0);
+		assertNotNull(list.size());
 	}
 	
 }
