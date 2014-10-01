@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.PersistenceException;
 import javax.persistence.Query;
 import javax.swing.JOptionPane;
 
@@ -11,7 +12,6 @@ import org.hibernate.exception.ConstraintViolationException;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
-import br.com.efb.entity.endereco.Cidade;
 import br.com.efb.entity.endereco.Estado;
 import br.com.efb.entity.endereco.Pais;
 
@@ -31,13 +31,12 @@ public class EstadoDao {
 	public void salvar(Estado estado) throws DAOException {
 		try {
 			em.merge(estado);
-		} catch (ConstraintViolationException erro) {
-			// TODO: handle exception
-			JOptionPane.showMessageDialog(null, "Estado J� Cadastrado");
-			erro.printStackTrace();
+		} catch (PersistenceException erro) {
+			throw new DAOException("Estado Ja Cadastrado", erro);
 		} catch (Exception causa) {
-			throw new DAOException("N�o foi possivel Cadastrado", causa);
+			throw new DAOException("Nao foi possivel Cadastrado", causa);
 		}
+		buscarPorNome(estado);
 
 	}
 

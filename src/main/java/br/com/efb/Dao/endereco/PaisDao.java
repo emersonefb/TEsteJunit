@@ -4,10 +4,9 @@ import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.PersistenceException;
 import javax.persistence.Query;
-import javax.swing.JOptionPane;
 
-import org.hibernate.exception.ConstraintViolationException;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -19,23 +18,21 @@ public class PaisDao {
 	@PersistenceContext
 	EntityManager em;
 
-	
 	/**
 	 * Salva Uma Pais
 	 * 
 	 * @param pais
-	 * @throws DAOException 
+	 * @throws DAOException
 	 */
 	@Transactional
 	public void salvar(Pais pais) throws DAOException {
 		try {
 			em.merge(pais);
-		} catch (ConstraintViolationException erro) {
-			// TODO: handle exception
-			JOptionPane.showMessageDialog(null, "Pais J� Cadastrado");
-			erro.printStackTrace();
+		} catch (PersistenceException erro) {
+			throw new DAOException("Pais Ja Cadastrado", erro);
 		} catch (Exception causa) {
-			throw new DAOException("N�o foi possivel Cadastrado", causa);
+			causa.printStackTrace();
+			throw new DAOException("Nao foi possivel Cadastrado", causa);
 		}
 
 	}
@@ -55,9 +52,10 @@ public class PaisDao {
 
 	/**
 	 * Busca Uma Pais Especifica
+	 * 
 	 * @param pais
 	 * @return um Pais
-	 * @throws DAOException 
+	 * @throws DAOException
 	 */
 	@Transactional
 	public Pais buscarPorId(Pais pais) throws DAOException {
@@ -72,6 +70,7 @@ public class PaisDao {
 
 	/**
 	 * exclui um Pais
+	 * 
 	 * @param Pais
 	 * @throws DAOException
 	 */
@@ -88,7 +87,8 @@ public class PaisDao {
 	}
 
 	public Pais buscarPorNome(Pais pais) {
-		Query consulta = em.createQuery("Select P From Pais P where P.nome='"+pais.getNome()+"'");
+		Query consulta = em.createQuery("Select P From Pais P where P.nome='"
+				+ pais.getNome() + "'");
 		pais = (Pais) consulta.getSingleResult();
 		return pais;
 	}

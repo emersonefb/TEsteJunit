@@ -4,15 +4,14 @@ import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.PersistenceException;
 import javax.persistence.Query;
-import javax.swing.JOptionPane;
 
-import org.hibernate.exception.ConstraintViolationException;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.TransactionSystemException;
 import org.springframework.transaction.annotation.Transactional;
 
 import br.com.efb.entity.endereco.Bairro;
-import br.com.efb.entity.endereco.Cidade;
 
 @Repository
 public class BairroDao {
@@ -31,12 +30,13 @@ public class BairroDao {
 	public void salvar(Bairro bairro) throws DAOException {
 		try {
 			em.merge(bairro);
-		} catch (ConstraintViolationException erro) {
-			// TODO: handle exception
-			JOptionPane.showMessageDialog(null, "Bairro J� Cadastrado");
-			erro.printStackTrace();
+		} catch (PersistenceException erro) {
+			throw new DAOException("Bairro Ja Cadastrado", erro);
+		} catch (TransactionSystemException erro) {
+			throw new DAOException("Bairro Ja Cadastrado", erro);
 		} catch (Exception causa) {
-			throw new DAOException("N�o foi possivel Cadastrado", causa);
+			causa.printStackTrace();
+			throw new DAOException("Nao foi possivel Cadastrado", causa);
 		}
 
 	}

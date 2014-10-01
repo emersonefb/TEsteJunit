@@ -14,8 +14,14 @@ public class CidadeService {
 	@Inject
 	CidadeDao cidadeDao;
 	
-	public void salvar(Cidade cidade) throws DAOException {
-		cidadeDao.salvar(cidade);
+	public Cidade salvar(Cidade cidade) throws DAOException {
+		try {
+			cidadeDao.salvar(cidade);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		cidade = buscarPorNome(cidade);
+		return cidade;
 	}
 	
 	public Cidade buscarPorNome(Cidade cidade) {

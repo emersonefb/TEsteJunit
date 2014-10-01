@@ -1,7 +1,5 @@
 package br.com.efb.model.service.Endereco;
 
-import java.util.List;
-
 import javax.inject.Inject;
 
 import org.springframework.stereotype.Service;
@@ -9,7 +7,6 @@ import org.springframework.stereotype.Service;
 import br.com.efb.Dao.endereco.DAOException;
 import br.com.efb.Dao.endereco.EnderecoDao;
 import br.com.efb.entity.endereco.Endereco;
-import br.com.efb.entity.endereco.Ruas;
 
 @Service
 public class EnderecoService {

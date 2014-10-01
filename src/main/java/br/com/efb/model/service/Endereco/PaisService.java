@@ -13,13 +13,20 @@ public class PaisService {
 
 	@Inject
 	PaisDao paisDao;
-	
-	public void salvar(Pais pais) throws DAOException {
-		paisDao.salvar(pais);
+
+	public Pais salvar(Pais pais) throws DAOException {
+		try {
+			paisDao.salvar(pais);
+		} catch (Exception e) {
+//			e.printStackTrace();
+		}
+		pais = buscarPorNome(pais);
+		return pais;
+
 	}
-	
+
 	public Pais buscarPorNome(Pais pais) {
 		return paisDao.buscarPorNome(pais);
 	}
-	
+
 }

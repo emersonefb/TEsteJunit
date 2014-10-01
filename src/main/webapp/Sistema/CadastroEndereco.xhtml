@@ -12,29 +12,35 @@
 		<p:panel header="Endereço">
 			<p:growl></p:growl>
 			<p:panelGrid columns="2">
-			
-			
-				<h:outputLabel value="CEP" />
-				<p:inputText value="#{enderecoBean.ruas.cep}"  />
+
+				<p:outputLabel value="CEP" for="acSimple" />
+				<p:autoComplete id="acSimple" value="#{enderecoBean.ruas.cep}"
+					completeMethod="#{enderecoBean.completeText}">
+					<p:ajax event="blur" listener="#{enderecoBean.buscarCep}"
+						update="@form" />
+				</p:autoComplete>
 
 				<h:outputLabel value="Rua" />
 				<h:outputLabel value="#{enderecoBean.endereco.ruas.nome}" />
-				
+
 				<h:outputLabel value="Bairro" />
 				<h:outputLabel value="#{enderecoBean.endereco.ruas.bairro.nome}" />
-				
+
 				<h:outputLabel value="Cidade" />
-				<h:outputLabel value="#{enderecoBean.endereco.ruas.bairro.cidade.nome}" />
-				
+				<h:outputLabel
+					value="#{enderecoBean.endereco.ruas.bairro.cidade.nome}" />
+
 				<h:outputLabel value="Estado" />
-				<h:outputLabel value="#{enderecoBean.endereco.ruas.bairro.cidade.estado.nome}" />
-				
+				<h:outputLabel
+					value="#{enderecoBean.endereco.ruas.bairro.cidade.estado.nome}" />
+
 				<h:outputLabel value="Pais" />
-				<h:outputLabel value="#{enderecoBean.endereco.ruas.bairro.cidade.estado.pais.nome}" />
+				<h:outputLabel
+					value="#{enderecoBean.endereco.ruas.bairro.cidade.estado.pais.nome}" />
 			</p:panelGrid>
 
-			<p:commandButton value="Enviar" action="#{enderecoBean.buscarCep}"
-				update="@form">
+			<p:commandButton id="Foi" value="Enviar"
+				action="#{enderecoBean.buscarCep}" update="@form">
 			</p:commandButton>
 		</p:panel>
 	</h:form>

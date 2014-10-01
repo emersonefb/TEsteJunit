@@ -31,7 +31,7 @@ public class testeRuas {
 	Ruas ruas = new Ruas();
 	Bairro bairro = new Bairro();
 	
-//	@Test
+	@Test
 	public void testBuscarTodos() {
 
 		List<Ruas> ruas = ruaDao.listaRua();
@@ -41,7 +41,7 @@ public class testeRuas {
 		assertTrue(ruas.size() != 0);
 	}
 
-	@Test
+//	@Test
 	public void testsalvar() {
 		ruas.setNome("Rua 2");
 		ruas.setCep("09391000");
@@ -68,7 +68,7 @@ public class testeRuas {
 		
 	}
 
-//	@Test
+	@Test
 	public void buscarporID(){
 		ruas.setId(1);
 		try {
@@ -83,11 +83,22 @@ public class testeRuas {
 		assertTrue(ruas.getNome().equalsIgnoreCase("Rua 2"));
 	}
 	
-//	@Test
+	@Test
 	public void test() {
 		ruas.setCep("09391000");
 		ruas = ruaDao.buscarPorCEP(ruas);
 		System.out.println(ruas.getNome()+" "+ ruas.getBairro().getNome());
+	}
+	
+	@Test
+	public void BuscaCepComeco() {
+		ruas.setCep("093");
+		List<Ruas>list = ruaDao.buscarPorComecoCEP(ruas);
+		for (Ruas ruas : list) {
+			System.out.println(ruas.getNome()+" "+ ruas.getBairro().getNome());
+		}
+		
+//		assertTrue(list.size() < 0);
 	}
 	
 }

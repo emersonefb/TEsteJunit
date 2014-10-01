@@ -1,5 +1,6 @@
 package br.com.efb.controller.bean.Endereco;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
@@ -64,15 +65,49 @@ public class EnderecoBean {
 
 	}
 
-	public void salvar() {
-		salvarPais();
-		salvarEstado();
-		salvarCidade();
-		salvarBairro();
-		salvarRuas();
-		salvarEndereco();
+	/**
+	 * Auto Complemento busca o CEP atraver do inicio digitado
+	 * 
+	 * @param cep
+	 * @return
+	 */
+	public List<String> completeText(String cep) {
+		List<String> results = new ArrayList<String>();
+		ruas.setCep(cep);
+		List<Ruas> list = ruasService.buscarPorComecoCEP(ruas);
+		if (list.equals(null)) {
+		} else {
+			for (Ruas ruas : list) {
+				results.add(ruas.getCep());
+			}
+		}
+		return results;
 	}
 
+	/**
+	 * execulta os metodos para salvar
+	 */
+	public void salvar() {
+		salvarPais();
+		System.out.println("Pais: " + pais.getId() + " : " + pais.getNome());
+		salvarEstado();
+		System.out.println("Estado: " + estado.getId() + " : "
+				+ estado.getNome());
+		salvarCidade();
+		System.out.println("Cidade: " + cidade.getId() + " : "
+				+ cidade.getNome());
+		salvarBairro();
+		System.out.println("Bairro: " + bairro.getId() + " : "
+				+ bairro.getNome());
+		salvarRuas();
+		System.out.println("CEP: " + ruas.getCep() + " Rua: " + ruas.getNome());
+		// salvarEndereco();
+		MensagemCadastrado("Ai Sim");
+	}
+
+	/**
+	 * Salva um endereco
+	 */
 	private void salvarEndereco() {
 		endereco.setNumero(456);
 		try {
@@ -84,118 +119,160 @@ public class EnderecoBean {
 		endereco.setRuas(ruas);
 		try {
 			enderecoService.salvar(endereco);
-
-			FacesContext.getCurrentInstance()
-					.addMessage(
-							null,
-							new FacesMessage(FacesMessage.SEVERITY_INFO,
-									"Salvo", null));
-			
-			pais = null;
-
-			estado = null;
-
-			cidade = null;
-
-			bairro = null;
-
-			ruas = null;
+			MensagemCadastrado("Rua");
+			limparCampos();
 		} catch (DAOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
 
+	/**
+	 * Limpa os Objetos
+	 */
+	private void limparCampos() {
+		pais = null;
+		estado = null;
+		cidade = null;
+		bairro = null;
+		ruas = null;
+	}
+
+	/**
+	 * Salva Ruas
+	 * 
+	 * @throws DAOException
+	 */
 	private void salvarRuas() {
 		bairro = bairroService.buscarPorNome(bairro);
 		ruas.setBairro(bairro);
 		try {
-			ruasService.salvar(ruas);
+			ruas = ruasService.salvar(ruas);
+			MensagemCadastrado("Rua");
 		} catch (DAOException e) {
-			// TODO Auto-generated catch block
+			try {
+				ruas = ruasService.buscarPorCEP(ruas);
+				MensagemCadastrado("Rua");
+			} catch (DAOException e1) {
+				e1.printStackTrace();
+			}
 			e.printStackTrace();
 		}
 	}
 
-	private void salvarBairro() {
+	/**
+	 * Salva Bairro
+	 */
+	private Bairro salvarBairro() {
 		cidade = cidadeService.buscarPorNome(cidade);
 		bairro.setCidade(cidade);
 		try {
-			bairroService.salvar(bairro);
+			bairro = bairroService.salvar(bairro);
+			MensagemCadastrado("Bairro");
 		} catch (DAOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			bairro = bairroService.buscarPorNome(bairro);
+			MensagemCadastrado("Bairro");
+			// e.printStackTrace();
 		}
+		return bairro;
 	}
 
-	private void salvarCidade() {
+	/**
+	 * Salva Cidade
+	 * @return 
+	 */
+	private Cidade salvarCidade() {
 		estado = estadoService.buscarPorNome(estado);
 		cidade.setEstado(estado);
 		try {
-			cidadeService.salvar(cidade);
+			cidade = cidadeService.salvar(cidade);
+			MensagemCadastrado("Cidade");
 		} catch (DAOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			cidade = cidadeService.buscarPorNome(cidade);
+			MensagemCadastrado("Cidade");
+			// e.printStackTrace();
 		}
+		return cidade;
 	}
 
-	private void salvarEstado() {
+	/**
+	 * Salva Estado
+	 * 
+	 * @return
+	 */
+	private Estado salvarEstado() {
 		pais = paisService.buscarPorNome(pais);
 		estado.setPais(pais);
 		try {
-			estadoService.salvar(estado);
+			estado = estadoService.salvar(estado);
+			MensagemCadastrado("Estado");
 		} catch (DAOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			estado = estadoService.buscarPorNome(estado);
+			MensagemCadastrado("Estado");
 		}
+		return estado;
 	}
 
-	private void salvarPais() {
+	/**
+	 * Salva Pais
+	 * 
+	 * @return
+	 */
+	private Pais salvarPais() {
 		try {
-			paisService.salvar(pais);
+			pais = paisService.salvar(pais);
+			MensagemCadastrado("Pais");
+
 		} catch (DAOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			pais = paisService.buscarPorNome(pais);
+			MensagemCadastrado("Pais");
 		}
+		return pais;
 	}
 
-	public void buscar() {
-		System.out.println("RUA:    "+ruas.getId());
-		endereco.setRuas(ruas); 
+	/**
+	 * envia para a tela a mensagem cadastrado
+	 * 
+	 * @param Mensagem
+	 */
+	private void MensagemCadastrado(String Mensagem) {
+		FacesContext.getCurrentInstance().addMessage(
+				null,
+				new FacesMessage(FacesMessage.SEVERITY_INFO, "Cadastrado "
+						+ Mensagem, null));
+	}
+
+	/**
+	 * Busca endereco pelo nome da Rua
+	 */
+	public void buscarEndereco() {
+		endereco.setRuas(ruas);
 		endereco = enderecoService.buscarPorRua(endereco);
-		System.out.println("Nome Rua asdf:  "+endereco.getId());
-		try {
-			endereco = enderecoService.buscarPorID(endereco);
-			System.out.println("esse" + endereco.getId());
-
-			FacesContext.getCurrentInstance()
-					.addMessage(
-							null,
-							new FacesMessage(FacesMessage.SEVERITY_INFO,
-									"Salvo", null));
-		} catch (DAOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
 	}
 
+	/**
+	 * Busca Uma Rua Pelo CEP
+	 */
 	public void buscarCep() {
-		// ruas.setId(1);
-		// ruas.setCep("09391000");
 		try {
+			ruas.setId(0);
 			ruas = ruasService.buscarPorCEP(ruas);
-			buscar();
-
-			FacesContext.getCurrentInstance()
-					.addMessage(
-							null,
-							new FacesMessage(FacesMessage.SEVERITY_INFO,
-									"Salvo", null));
-		} catch (DAOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+		} catch (DAOException e1) {
+			e1.printStackTrace();
+		} finally {
+			if (ruas.getId() == 0) {
+				MensagemCadastrado("CEP Nao Encontrado");
+				return;
+			} else {
+				buscarEndereco();
+			}
 		}
 	}
+
+	/**
+	 * get e set
+	 * 
+	 * @return
+	 */
 
 	public EnderecoService getEnderecoService() {
 		return enderecoService;
@@ -293,5 +370,4 @@ public class EnderecoBean {
 		this.ruas = ruas;
 	}
 
-	
 }

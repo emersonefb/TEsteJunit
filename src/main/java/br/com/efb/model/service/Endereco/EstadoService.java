@@ -14,8 +14,15 @@ public class EstadoService {
 	@Inject
 	EstadoDao estadoDao;
 	
-	public void salvar(Estado estado) throws DAOException {
-		estadoDao.salvar(estado);
+	public Estado salvar(Estado estado) throws DAOException {
+		try {
+			estadoDao.salvar(estado);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		estado = buscarPorNome(estado);
+		return estado;
+		
 	}
 	
 	public Estado buscarPorNome(Estado estado) {

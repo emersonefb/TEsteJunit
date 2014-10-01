@@ -12,7 +12,6 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import br.com.efb.entity.endereco.Endereco;
-import br.com.efb.entity.endereco.Ruas;
 
 @Repository
 public class EnderecoDao {
@@ -72,14 +71,28 @@ public class EnderecoDao {
 		try {
 			endereco = em.find(Endereco.class, endereco.getId());
 		} catch (Exception causa) {
+			causa.printStackTrace();
 			throw new DAOException("Nao foi possivel Encontrar", causa);
 		}
 		return endereco;
 	}
 
+	@SuppressWarnings("unchecked")
 	public Endereco buscarPorRua(Endereco endereco) {
-		Query consulta = em.createQuery("Select E from Endereco E where E.ruas.id ="+endereco.getRuas().getId()+"and E.numero = 10");
-		return  (Endereco) consulta.getSingleResult();
+		try {
+			Query consulta = em
+					.createQuery("Select E from Endereco E where E.ruas.id ="
+							+ endereco.getRuas().getId());
+			List<Endereco> enderecos = consulta.getResultList();
+			for (Endereco endereco2 : enderecos) {
+				return endereco2;
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			System.out.println("nao ha um resultado na busca");
+			return null;
+		}
+		return null;
 	}
 
 }

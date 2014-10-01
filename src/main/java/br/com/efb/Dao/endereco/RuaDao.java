@@ -3,11 +3,11 @@ package br.com.efb.Dao.endereco;
 import java.util.List;
 
 import javax.persistence.EntityManager;
+import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
+import javax.persistence.PersistenceException;
 import javax.persistence.Query;
-import javax.swing.JOptionPane;
 
-import org.hibernate.exception.ConstraintViolationException;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -30,11 +30,10 @@ public class RuaDao {
 	public void salvar(Ruas ruas) throws DAOException {
 		try {
 			em.merge(ruas);
-		} catch (ConstraintViolationException erro) {
-			// TODO: handle exception
-			JOptionPane.showMessageDialog(null, "CEP J� Cadastrado");
-			erro.printStackTrace();
+		} catch (PersistenceException erro) {
+			throw new DAOException("CEP Ja Cadastrado", erro);
 		} catch (Exception causa) {
+			causa.printStackTrace();
 			throw new DAOException("Nao foi possivel Cadastrado", causa);
 		}
 
@@ -92,10 +91,22 @@ public class RuaDao {
 	 * @param ruas
 	 * @return
 	 */
-	public Ruas buscarPorCEP(Ruas ruas) {
-		Query consulta = em.createQuery("Select R From Ruas R where R.cep='"+ruas.getCep()+"'");
-		ruas = (Ruas) consulta.getSingleResult();
-		return ruas;
+	public Ruas buscarPorCEP(Ruas ruas) throws NoResultException {
+		try {
+			Query consulta = em.createQuery("Select R From Ruas R where R.cep='"+ruas.getCep()+"'");
+			ruas = (Ruas) consulta.getSingleResult();
+			return ruas;
+		} catch (Exception e) {
+			return null;
+		}
+		
+	}
+	
+	@SuppressWarnings("unchecked")
+	public List<Ruas> buscarPorComecoCEP(Ruas ruas) throws NoResultException {
+		Query consulta = em.createQuery("Select R From Ruas R where R.cep like '" + ruas.getCep() + "%'");
+		List<Ruas> list = consulta.getResultList();
+		return list;
 	}
 
 }
