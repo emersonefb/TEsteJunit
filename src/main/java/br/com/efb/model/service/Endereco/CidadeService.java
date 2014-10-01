@@ -1,5 +1,7 @@
 package br.com.efb.model.service.Endereco;
 
+import java.util.List;
+
 import javax.inject.Inject;
 
 import org.springframework.stereotype.Service;
@@ -21,10 +23,15 @@ public class CidadeService {
 			e.printStackTrace();
 		}
 		cidade = buscarPorNome(cidade);
+		
+		
 		return cidade;
 	}
 	
 	public Cidade buscarPorNome(Cidade cidade) {
-		return cidade = cidadeDao.buscarPorNome(cidade);
+		List<Cidade> cidades = cidadeDao.buscarPorNome(cidade);
+		cidade = cidades.get(0);
+		System.out.println("Essa e a Cidade" + cidade.getId()+" : "+ cidade.getNome());
+		return cidade;
 	}
 }

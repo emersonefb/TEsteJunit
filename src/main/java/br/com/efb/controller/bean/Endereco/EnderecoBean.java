@@ -89,19 +89,11 @@ public class EnderecoBean {
 	 */
 	public void salvar() {
 		salvarPais();
-		System.out.println("Pais: " + pais.getId() + " : " + pais.getNome());
 		salvarEstado();
-		System.out.println("Estado: " + estado.getId() + " : "
-				+ estado.getNome());
 		salvarCidade();
-		System.out.println("Cidade: " + cidade.getId() + " : "
-				+ cidade.getNome());
 		salvarBairro();
-		System.out.println("Bairro: " + bairro.getId() + " : "
-				+ bairro.getNome());
 		salvarRuas();
-		System.out.println("CEP: " + ruas.getCep() + " Rua: " + ruas.getNome());
-		// salvarEndereco();
+		salvarEndereco();
 		MensagemCadastrado("Ai Sim");
 	}
 
@@ -134,7 +126,7 @@ public class EnderecoBean {
 		estado = null;
 		cidade = null;
 		bairro = null;
-		ruas = null;
+//		ruas = null;
 	}
 
 	/**
@@ -178,7 +170,8 @@ public class EnderecoBean {
 
 	/**
 	 * Salva Cidade
-	 * @return 
+	 * 
+	 * @return
 	 */
 	private Cidade salvarCidade() {
 		estado = estadoService.buscarPorNome(estado);
@@ -261,6 +254,7 @@ public class EnderecoBean {
 		} finally {
 			if (ruas.getId() == 0) {
 				MensagemCadastrado("CEP Nao Encontrado");
+				limparCampos();
 				return;
 			} else {
 				buscarEndereco();

@@ -29,13 +29,15 @@ public class CidadeDao {
 	@Transactional
 	public void salvar(Cidade cidade) throws DAOException {
 		try {
+			System.out.println(cidade.getId()+" : "+ cidade.getNome());
 			em.merge(cidade);
+			System.out.println("Cidade OK");
 		} catch (ConstraintViolationException erro) {
 			// TODO: handle exception
 			JOptionPane.showMessageDialog(null, "Cidade Ja Cadastrado");
 			erro.printStackTrace();
-		} catch (Exception causa) {
-			throw new DAOException("Nao foi possivel Cadastrado", causa);
+//		} catch (Exception causa) {
+//			throw new DAOException("Nao foi possivel Cadastrado", causa);
 		}
 
 	}
@@ -87,10 +89,10 @@ public class CidadeDao {
 
 	}
 
-	public Cidade buscarPorNome(Cidade cidade) {
+	public List<Cidade> buscarPorNome(Cidade cidade) {
 			Query consulta = em.createQuery("Select C From Cidade C where C.nome='"+cidade.getNome()+"'");
-			cidade = (Cidade) consulta.getSingleResult();
-			return cidade;
+			List<Cidade> cidades = consulta.getResultList();
+			return cidades;
 	}
 
 }

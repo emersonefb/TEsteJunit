@@ -88,10 +88,10 @@ public class BairroDao {
 
 	}
 
-	public Bairro buscarPorNome(Bairro bairro) {
+	public List<Bairro> buscarPorNome(Bairro bairro) {
 		Query consulta = em.createQuery("Select B From Bairro B where B.nome='"+bairro.getNome()+"'");
-		bairro = (Bairro) consulta.getSingleResult();
-		return bairro;
+		List<Bairro> bairros = consulta.getResultList();
+		return bairros;
 	}
 
 }
