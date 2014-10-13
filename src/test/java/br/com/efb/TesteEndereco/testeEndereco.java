@@ -1,6 +1,6 @@
 package br.com.efb.TesteEndereco;
 
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
 
 import java.util.List;
 
@@ -16,7 +16,6 @@ import org.springframework.transaction.annotation.Transactional;
 import br.com.efb.Dao.endereco.DAOException;
 import br.com.efb.Dao.endereco.EnderecoDao;
 import br.com.efb.entity.endereco.Endereco;
-import br.com.efb.entity.endereco.Ruas;
 
 //@RunWith(JUnit4.class)
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -28,7 +27,6 @@ public class testeEndereco {
 	@Inject
 	EnderecoDao enderecoDao;
 
-	Ruas ruas = new Ruas();
 	Endereco endereco = new Endereco();
 
 	 @Test
@@ -39,28 +37,30 @@ public class testeEndereco {
 			System.out.println(" ID: "
 					+ endereco.getId()
 					+ "\n Rua:  "
-					+ endereco.getRuas().getNome()
+					+ endereco.getRua()
 					+ "\n Numero: "
 					+ endereco.getNumero()
 					+ "\n Bairro: "
-					+ endereco.getRuas().getBairro().getNome()
+					+ endereco.getBairro()
 					+ "\n Cidade: "
-					+ endereco.getRuas().getBairro().getCidade().getNome()
+					+ endereco.getCidade()
 					+ "\n Estado: "
-					+ endereco.getRuas().getBairro().getCidade().getEstado()
-							.getNome()
+					+ endereco.getEstado()
 					+ "\n Pais: "
-					+ endereco.getRuas().getBairro().getCidade().getEstado()
-							.getPais().getNome());
+					+ endereco.getPais());
 		}
 		assertTrue(enderecos.size() != 0);
 	}
 
 	 @Test
 	public void testsalvar() {
-		ruas.setId(1);
-		endereco.setNumero(10);
-		endereco.setRuas(ruas);
+		endereco.setNumero(12);
+		endereco.setRua("Rosa Gabioneta");
+		endereco.setBairro("Boa Vista");
+		endereco.setCep("0939077");
+		endereco.setCidade("Maua");
+		endereco.setEstado("SP");
+		endereco.setPais("Brasil");
 		try {
 			enderecoDao.salvar(endereco);
 		} catch (DAOException e) {
@@ -90,19 +90,16 @@ public class testeEndereco {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		System.out.println(endereco.getNumero());
-		System.out.println(endereco.getRuas().getNome());
-
-		// assertTrue(endereco.getRuas().getBairro().getNome()
-		// .equalsIgnoreCase("Boa Vista"));
+		 assertEquals("Boa Vista",endereco.getBairro());
 	}
 
 	@Test
 	public void buscaporRua() {
-		ruas.setId(1);
-		endereco.setRuas(ruas);
+		endereco.setRua("Rosa Gabioneta");
 
 		endereco = enderecoDao.buscarPorRua(endereco);
-			System.out.println(endereco.getRuas().getNome());
+//			System.out.println(endereco.getRua());
+			
+			assertEquals("Rosa Gabioneta", endereco.getRua());
 	}
 }

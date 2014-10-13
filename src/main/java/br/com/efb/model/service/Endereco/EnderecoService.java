@@ -1,5 +1,7 @@
 package br.com.efb.model.service.Endereco;
 
+import java.util.List;
+
 import javax.inject.Inject;
 
 import org.springframework.stereotype.Service;
@@ -25,6 +27,10 @@ public class EnderecoService {
 
 	public Endereco buscarPorRua(Endereco endereco) {
 		return enderecoDao.buscarPorRua(endereco);
+	}
+
+	public List<Endereco> buscarPorComecoCEP(Endereco endereco) {
+		return enderecoDao.buscarPorCEP(endereco);
 	}
 
 }

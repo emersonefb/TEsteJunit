@@ -1,5 +1,7 @@
 package br.com.efb.TestePessoa;
 
+import static org.junit.Assert.*;
+
 import java.text.ParseException;
 import java.util.Date;
 import java.util.List;
@@ -33,13 +35,13 @@ public class TestPessoaFisica {
 	DocumentosPF documentosPF = new DocumentosPF();
 	Endereco endereco = new Endereco();
 
-	 @Test
+	@Test
 	public void Salvar() {
 		pessoaFisica.setTipodePessoa("Fisica");
 		pessoaFisica.setNome("Pedro");
 		pessoaFisica.setNomeCompleto("Pedro Luis");
 		String Nascimento = "13/06/1982";
-		Date dataNascimento = ConverteStringParaData(Nascimento); 
+		Date dataNascimento = ConverteStringParaData(Nascimento);
 		pessoaFisica.setDataDeNascimento(dataNascimento);
 		endereco.setId(1);
 		documentosPF.setId(1);
@@ -72,11 +74,13 @@ public class TestPessoaFisica {
 		for (PessoaFisica pessoaFisica : pessoaFisicas) {
 			System.out.println("ID: " + pessoaFisica.getId() + " None: "
 					+ pessoaFisica.getNome() + " None Completo: "
-					+ pessoaFisica.getNomeCompleto());
-			// + " Data Nascimento: "
-			// + pessoaFisica.getDataDeNascimento() + " RG: "
+					+ pessoaFisica.getNomeCompleto() + " Data Nascimento: "
+					+ pessoaFisica.getDataDeNascimento());
+			// + " RG: "
 			// + pessoaFisica.getDocumentos().getRg().getNumero());
 		}
+
+		assertEquals("Pedro", pessoaFisicas.get(0).getNome());
 	}
 
 }

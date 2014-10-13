@@ -8,8 +8,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
 
-import br.com.efb.entity.endereco.Estado;
-
 @Entity
 public class RG {
 
@@ -20,8 +18,7 @@ public class RG {
 	@Column(unique = true, nullable = false)
 	private String numero;
 
-	@OneToOne()
-	private Estado estado;
+	private String estado;
 	
 	private Date dataExpedicao;
 
@@ -50,12 +47,14 @@ public class RG {
 	}
 
 
-	public Estado getEstado() {
+
+
+	public String getEstado() {
 		return estado;
 	}
 
 
-	public void setEstado(Estado estado) {
+	public void setEstado(String estado) {
 		this.estado = estado;
 	}
 

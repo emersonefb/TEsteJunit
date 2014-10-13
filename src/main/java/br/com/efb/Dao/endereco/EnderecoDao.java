@@ -81,8 +81,8 @@ public class EnderecoDao {
 	public Endereco buscarPorRua(Endereco endereco) {
 		try {
 			Query consulta = em
-					.createQuery("Select E from Endereco E where E.ruas.id ="
-							+ endereco.getRuas().getId());
+					.createQuery("Select E from Endereco E where E.rua ='"
+							+ endereco.getRua()+"'");
 			List<Endereco> enderecos = consulta.getResultList();
 			for (Endereco endereco2 : enderecos) {
 				return endereco2;
@@ -93,6 +93,21 @@ public class EnderecoDao {
 			return null;
 		}
 		return null;
+	}
+
+	public List<Endereco> buscarPorCEP(Endereco endereco) {
+		try {
+			Query consulta = em
+					.createQuery("Select E from Endereco E where E.cep.id ="
+							+ endereco.getCep());
+			@SuppressWarnings("unchecked")
+			List<Endereco> enderecos = consulta.getResultList();
+				return enderecos;
+		} catch (Exception e) {
+			e.printStackTrace();
+			System.out.println("nao ha um resultado na busca");
+			return null;
+		}
 	}
 
 }
